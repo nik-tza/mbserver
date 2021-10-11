@@ -4,6 +4,9 @@ package mbserver
 import (
 	"io"
 	"net"
+	"fmt"
+    "math/rand"
+    "time"
 
 	"github.com/goburrow/serial"
 )
@@ -80,9 +83,17 @@ func (s *Server) handle(request *Request) Framer {
 	return response
 }
 
+func (s *Server) random_generator() {
+	rand.Seed(time.Now().UnixNano())
+	min := 120
+	max := 150
+	s.HoldingRegisters[10] = uint16(rand.Intn(max - min + 1) + min)
+}
+
 // All requests are handled synchronously to prevent modbus memory corruption.
 func (s *Server) handler() {
 	for {
+		s.random_generator()
 		request := <-s.requestChan
 		response := s.handle(request)
 		request.conn.Write(response.Bytes())
