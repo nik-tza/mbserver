@@ -54,6 +54,9 @@ func NewServer() *Server {
 	s.requestChan = make(chan *Request)
 	go s.handler()
 
+	rand.Seed(time.Now().UnixNano())
+	go s.random_generator()
+
 	return s
 }
 
@@ -84,10 +87,14 @@ func (s *Server) handle(request *Request) Framer {
 }
 
 func (s *Server) random_generator() {
-	rand.Seed(time.Now().UnixNano())
 	min := 120
 	max := 150
-	s.HoldingRegisters[10] = uint16(rand.Intn(max - min + 1) + min)
+	for{
+		for i := 0; i < 10; i++ {
+			s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
+		}
+		time.Sleep(time.Second * rand.Intn(10))	
+	}
 }
 
 // All requests are handled synchronously to prevent modbus memory corruption.
