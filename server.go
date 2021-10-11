@@ -4,7 +4,6 @@ package mbserver
 import (
 	"io"
 	"net"
-	"fmt"
     "math/rand"
     "time"
 
