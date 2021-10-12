@@ -92,7 +92,7 @@ func (s *Server) random_generator() {
 		for i := 0; i < 10; i++ {
 			s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
 		}
-		//time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
+		time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
 	}
 }
 
