@@ -99,7 +99,6 @@ func (s *Server) random_generator() {
 // All requests are handled synchronously to prevent modbus memory corruption.
 func (s *Server) handler() {
 	for {
-		s.random_generator()
 		request := <-s.requestChan
 		response := s.handle(request)
 		request.conn.Write(response.Bytes())
