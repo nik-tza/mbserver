@@ -88,8 +88,18 @@ func (s *Server) handle(request *Request) Framer {
 func (s *Server) random_generator() {
 	min := 120
 	max := 150
+
+	s.HoldingRegisters[6337] = 16025
+	s.HoldingRegisters[6339] = 48532
+	s.HoldingRegisters[6341] = 17179
+	s.HoldingRegisters[6343] = 16477
+	s.HoldingRegisters[6345] = 15861
+	s.HoldingRegisters[6347] = 15821
+	s.HoldingRegisters[6349] = 17178
+	s.HoldingRegisters[6351] = 16078
+	
 	for{
-		for i := 0; i < 10; i++ {
+		for i := 6338; i < 6353; i+=2 {
 			s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
 		}
 		time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
