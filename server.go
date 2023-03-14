@@ -86,6 +86,7 @@ func (s *Server) handle(request *Request) Framer {
 }
 
 func (s *Server) random_generator() {
+	// test change.
 	min := 120
 	max := 150
 
