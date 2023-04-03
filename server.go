@@ -120,7 +120,7 @@ func (s *Server) random_generator() {
 	}
 	
 
-	for i:=6337;i<6345 ;i++ {
+	for i:=0;i<7 ;i++ {
 		ui64, err := strconv.ParseUint(rec[1+i], 10, 64)
 		if err != nil {
       			panic(err)
@@ -130,7 +130,7 @@ func (s *Server) random_generator() {
 		fmt.Printf("%+v\n", s.HoldingRegisters[6337+i])
 	}
 	
-	for i := 6346; i < 6353; i+=2 {
+	for i := 6345; i < 6353; i+=2 {
 		s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
 	}
 	time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
