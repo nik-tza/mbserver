@@ -122,14 +122,13 @@ func (s *Server) random_generator() {
 		ui := uint16(ui64)
 		s.HoldingRegisters[6337+i] = ui
 		fmt.Printf("%+v\n", s.HoldingRegisters[6337+i])
-
-	
-	for{
-		for i := 6346; i < 6353; i+=2 {
-			s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
-		}
-		time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
 	}
+	
+	for i := 6346; i < 6353; i+=2 {
+		s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
+	}
+	time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
+
 }
 
 // All requests are handled synchronously to prevent modbus memory corruption.
