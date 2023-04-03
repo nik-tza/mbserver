@@ -9,6 +9,7 @@ import (
     "encoding/csv" //added
     "fmt"
     "os"
+    "log"
     "strconv"   //added
 
 	"github.com/goburrow/serial"
@@ -114,10 +115,16 @@ func (s *Server) random_generator() {
 
 	csvReader := csv.NewReader(fd)
 	rec, err := csvReader.Read()
+	if err != nil {
+		log.Fatal(err)
+	}
 	
 
 	for i:=6337;i<6345 ;i++ {
 		ui64, err := strconv.ParseUint(rec[1+i], 10, 64)
+		if err != nil {
+      			panic(err)
+  		}
 		ui := uint16(ui64)
 		s.HoldingRegisters[6337+i] = ui
 		fmt.Printf("%+v\n", s.HoldingRegisters[6337+i])
