@@ -114,6 +114,9 @@ func (s *Server) random_generator() {
 	s.HoldingRegisters[6351] = 16078
 
 	csvReader := csv.NewReader(fd)
+	
+	for{
+		
 	rec, err := csvReader.Read()
 	if err != nil {
 		log.Fatal(err)
@@ -134,7 +137,8 @@ func (s *Server) random_generator() {
 		s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
 	}
 	time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
-
+		
+	}
 }
 
 // All requests are handled synchronously to prevent modbus memory corruption.
