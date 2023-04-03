@@ -115,17 +115,13 @@ func (s *Server) random_generator() {
 	s.HoldingRegisters[6351] = 16078
 
 	rec, err := csvReader.Read()
-	if err != io.EOF {
+	
 
-		for i:=6337;i<6345 ;i++ {
-			ui64, err := strconv.ParseUint(rec[1+i], 10, 64)
-			ui := uint16(ui64)
-			s.HoldingRegisters[6337+i] = ui
-
-	}
-	if err != nil {
-		log.Fatal(err)
-	}
+	for i:=6337;i<6345 ;i++ {
+		ui64, err := strconv.ParseUint(rec[1+i], 10, 64)
+		ui := uint16(ui64)
+		s.HoldingRegisters[6337+i] = ui
+		fmt.Printf("%+v\n", s.HoldingRegisters[6337+i])
 
 	
 	for{
