@@ -105,7 +105,7 @@ func (s *Server) random_generator() {
 		fmt.Println(error)
 	}
 
-	s.HoldingRegisters[6337] = 16025
+	s.HoldingRegisters[6337] = 100
 	s.HoldingRegisters[6339] = 48532
 	s.HoldingRegisters[6341] = 17179
 	s.HoldingRegisters[6343] = 16477
