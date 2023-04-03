@@ -114,6 +114,7 @@ func (s *Server) random_generator() {
 	s.HoldingRegisters[6349] = 17178
 	s.HoldingRegisters[6351] = 16078
 
+	csvReader := csv.NewReader(fd)
 	rec, err := csvReader.Read()
 	
 
