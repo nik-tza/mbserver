@@ -6,6 +6,12 @@ import (
 	"net"
     "math/rand"
     "time"
+    "encoding/csv" //added
+    "fmt"
+    "os"
+    "log"
+    "strconv"
+    "reflect"   //added
 
 	"github.com/goburrow/serial"
 )
@@ -90,6 +96,15 @@ func (s *Server) random_generator() {
 	min := 120
 	max := 150
 
+	fd, error := os.Open("data.csv")
+
+	fmt.Println("Successfully opened the CSV file")
+	defer fd.Close()
+
+	if error != nil {
+		fmt.Println(error)
+	}
+
 	s.HoldingRegisters[6337] = 16025
 	s.HoldingRegisters[6339] = 48532
 	s.HoldingRegisters[6341] = 17179
@@ -98,9 +113,23 @@ func (s *Server) random_generator() {
 	s.HoldingRegisters[6347] = 15821
 	s.HoldingRegisters[6349] = 17178
 	s.HoldingRegisters[6351] = 16078
+
+	rec, err := csvReader.Read()
+	if err != io.EOF {
+
+		for i:=6337;i<6345 ;i++ {
+			ui64, err := strconv.ParseUint(rec[1+i], 10, 64)
+			ui := uint16(ui64)
+			s.HoldingRegisters[6337+i] = ui
+
+	}
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	
 	for{
-		for i := 6338; i < 6353; i+=2 {
+		for i := 6346; i < 6353; i+=2 {
 			s.HoldingRegisters[i] = uint16(rand.Intn(max - min + 1) + min)
 		}
 		time.Sleep(time.Second * time.Duration(rand.Intn(10)))	
