@@ -9,9 +9,7 @@ import (
     "encoding/csv" //added
     "fmt"
     "os"
-    "log"
-    "strconv"
-    "reflect"   //added
+    "strconv"   //added
 
 	"github.com/goburrow/serial"
 )
